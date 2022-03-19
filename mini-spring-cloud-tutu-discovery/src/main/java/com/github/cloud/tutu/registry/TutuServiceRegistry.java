@@ -1,4 +1,4 @@
-package com.github.cloud.tutu.registry.com.github.cloud.tutu.registry;
+package com.github.cloud.tutu.registry;
 
 import cn.hutool.http.HttpUtil;
 import com.github.cloud.tutu.TutuDiscoveryProperties;

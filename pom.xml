@@ -14,16 +14,15 @@
     <groupId>com.github</groupId>
     <artifactId>mini-spring-cloud</artifactId>
     <packaging>pom</packaging>
-    <version>${revision}</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <modules>
         <module>mini-spring-cloud-examples/tutu-server</module>
-        <module>mini-spring-cloud-tuut-discovery</module>
+        <module>mini-spring-cloud-tutu-discovery</module>
         <module>mini-spring-cloud-examples/mini-spring-cloud-provider-example</module>
     </modules>
 
     <properties>
-        <revision>1.0.0</revision>
         <spring.cloud.version>2021.0.1</spring.cloud.version>
         <fastjson.version>1.2.79</fastjson.version>
         <hutool.version>5.7.21</hutool.version>
@@ -45,6 +44,12 @@
                 <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github</groupId>
+                <artifactId>mini-spring-cloud-tutu-discovery</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>

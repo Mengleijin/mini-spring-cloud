@@ -1,4 +1,4 @@
-package com.github.cloud.tutu.registry.com.github.cloud.tutu.registry;
+package com.github.cloud.tutu.registry;
 
 import org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration;
 import org.springframework.cloud.client.serviceregistry.Registration;
