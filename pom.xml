@@ -18,6 +18,8 @@
 
     <modules>
         <module>mini-spring-cloud-examples/tutu-server</module>
+        <module>mini-spring-cloud-tuut-discovery</module>
+        <module>mini-spring-cloud-examples/mini-spring-cloud-provider-example</module>
     </modules>
 
     <properties>
