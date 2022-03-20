@@ -336,3 +336,175 @@ server:
 ]
 ```
 
+# [服务发现](#服务发现)
+> 分支: service-discovery
+
+spring-cloud-commons定义的服务发现接口```org.springframework.cloud.client.discovery.DiscoveryClient```:
+```java
+public interface DiscoveryClient extends Ordered {
+
+	/**
+	 * Gets all ServiceInstances associated with a particular serviceId.
+	 * @param serviceId The serviceId to query.
+	 * @return A List of ServiceInstance.
+	 */
+	List<ServiceInstance> getInstances(String serviceId);
+
+	/**
+	 * @return All known service IDs.
+	 */
+	List<String> getServices();
+}
+```
+
+仅需实现DiscoveryClient接口即可，实现类:
+```java
+/**
+ * 服务发现实现类
+ */
+public class TutuDiscoveryClient implements DiscoveryClient {
+    private static final Logger logger = LoggerFactory.getLogger(TutuDiscoveryClient.class);
+
+    private TutuDiscoveryProperties tutuDiscoveryProperties;
+
+    public TutuDiscoveryClient(TutuDiscoveryProperties tutuDiscoveryProperties) {
+        this.tutuDiscoveryProperties = tutuDiscoveryProperties;
+    }
+
+    @Override
+    public List<ServiceInstance> getInstances(String serviceId) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("serviceName", serviceId);
+
+        String response = HttpUtil.get(tutuDiscoveryProperties.getServerAddr() + "/list", param);
+        logger.info("query service instance, serviceId: {}, response: {}", serviceId, response);
+        return JSON.parseArray(response).stream().map(hostInfo -> {
+            TutuServiceInstance serviceInstance = new TutuServiceInstance();
+            serviceInstance.setServiceId(serviceId);
+            String ip = ((JSONObject) hostInfo).getString("ip");
+            Integer port = ((JSONObject) hostInfo).getInteger("port");
+            serviceInstance.setHost(ip);
+            serviceInstance.setPort(port);
+            return serviceInstance;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getServices() {
+        String response = HttpUtil.post(tutuDiscoveryProperties.getServerAddr() + "/listServiceNames", new HashMap<>());
+        logger.info("query service instance list, response: {}", response);
+        return JSON.parseArray(response, String.class);
+    }
+}
+```
+
+自动装配TutuDiscoveryAutoConfiguration:
+```java
+@Configuration
+public class TutuDiscoveryAutoConfiguration {
+
+    @Bean
+    @ConditionalOnMissingBean
+    public TutuDiscoveryProperties tutuDiscoveryProperties() {
+        return new TutuDiscoveryProperties();
+    }
+
+    @Bean
+    public DiscoveryClient tutuDiscoveryClient(TutuDiscoveryProperties tutuDiscoveryProperties) {
+        return new TutuDiscoveryClient(tutuDiscoveryProperties);
+    }
+}
+```
+spring.factories:
+```yaml
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.github.cloud.tutu.registry.TutuServiceRegistryAutoConfiguration,\
+  com.github.cloud.tutu.discovery.TutuDiscoveryAutoConfiguration
+```
+
+测试:
+
+1、maven install，启动服务注册和发现中心TutuServerApplication，启动服务提供者ProviderApplication，启动服务消费者ConsumerApplication(后续测试步骤均同此，不再提及)
+
+服务消费者代码如下:
+```java
+@SpringBootApplication
+public class ConsumerApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(ConsumerApplication.class, args);
+  }
+
+  @RestController
+  static class HelloController {
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+    private RestTemplate restTemplate = new RestTemplate();
+
+    @GetMapping("/hello")
+    public String hello() {
+      List<ServiceInstance> serviceInstances = discoveryClient.getInstances("provider-application");
+      if (serviceInstances.size() > 0) {
+        ServiceInstance serviceInstance = serviceInstances.get(0);
+        URI uri = serviceInstance.getUri();
+        String response = restTemplate.postForObject(uri.toString() + "/echo", null, String.class);
+        return response;
+      }
+
+      throw new RuntimeException("No service instance for provider-application found");
+    }
+  }
+}
+```
+application.yml:
+```yaml
+spring:
+  application:
+    name: consumer-application
+  cloud:
+    tutu:
+      discovery:
+        server-addr: localhost:6688
+        service: ${spring.application.name}
+```
+
+2、访问http://localhost:8080/hello ,相应报文如下:
+```yaml
+Port of the service provider: 19922
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

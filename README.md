@@ -11,8 +11,8 @@
 
 ## 功能
 #### 基础篇
-* [服务注册]()
-* [服务发现]()
+* [服务注册](https://github.com/DerekYRC/mini-spring-cloud/blob/main/changelog.md#服务注册)
+* [服务发现](https://github.com/DerekYRC/mini-spring-cloud/blob/main/changelog.md#服务发现)
 * [负载均衡]()
 * [集成Feign简化调用]()
 * [流量控制]()
