@@ -103,18 +103,8 @@ public class TutuServerApplication {
 ```
 配置application.yml:
 ```yaml
-spring:
-  application:
-    name: provider-application
-  cloud:
-    tutu:
-      discovery:
-        server-addr: localhost:6688
-        service: ${spring.application.name}
-
-# 随机端口
 server:
-  port: ${random.int[10000,20000]}
+  port: 6688
 ```
 
 spring-cloud-commons服务注册相关API:
@@ -260,9 +250,6 @@ TutuServiceRegistryAutoConfiguration:
 ```java
 /**
  * 自动配置服务注册相关类
- *
- * @author derek(易仁川)
- * @date 2022/3/19
  */
 @Configuration
 @ConditionalOnProperty(value = "spring.cloud.service-registry.auto-registration.enabled", matchIfMissing = true)
@@ -297,6 +284,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 ```
 
 测试:
+
 1、maven install
 
 ![](./assets/service-registry-maven.png)
@@ -338,7 +326,7 @@ server:
   port: ${random.int[10000,20000]}
 ```
 
-4、浏览器中访问http://localhost:6688/list?serviceName=provider-application或执行命令行 'curl -X GET 'http://localhost:6688/list?serviceName=provider-application'，响应报文如下，说明服务已经注册到服务注册中心
+4、浏览器中访问http://localhost:6688/list?serviceName=provider-application 或执行命令 ```curl -X GET 'http://localhost:6688/list?serviceName=provider-application'``` ，响应报文如下，说明服务已经注册到服务注册中心
 ```json
 [
   {
