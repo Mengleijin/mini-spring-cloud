@@ -25,6 +25,11 @@ public class TutuServiceRegistry implements ServiceRegistry<Registration> {
         this.tutuDiscoveryProperties = tutuDiscoveryProperties;
     }
 
+    /**
+     * 注册服务实例
+     *
+     * @param registration
+     */
     @Override
     public void register(Registration registration) {
         Map<String, Object> param = new HashMap<>();
@@ -43,6 +48,11 @@ public class TutuServiceRegistry implements ServiceRegistry<Registration> {
         }
     }
 
+    /**
+     * 注销服务实例
+     *
+     * @param registration
+     */
     @Override
     public void deregister(Registration registration) {
         Map<String, Object> param = new HashMap<>();

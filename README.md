@@ -24,12 +24,12 @@
 
 
 ## 使用方法
-阅读 [changelog.md](./changelog.md)
+阅读 [changelog.md](https://github.com/DerekYRC/mini-spring/blob/main/changelog.md)
 
 ## 常见问题
 [**点此提问**](https://github.com/DerekYRC/mini-spring-cloud/issues/1)
 
-常见问题列表: [faq.md](./faq.md)
+常见问题列表: [faq.md](https://github.com/DerekYRC/mini-spring/blob/main/faq.md)
 
 ## 贡献
 欢迎Pull Request
