@@ -9,6 +9,8 @@
 ## 关于
 **mini-spring-cloud**是简化版的spring-cloud框架，能帮助你快速熟悉spring-cloud源码及掌握其核心原理。在保留spring cloud核心功能的的前提下尽量精简代码，核心功能包括服务注册、服务发现、负载均衡、集成Feign简化调用、流量控制、熔断降级、API网关等。
 
+希望本项目对你有所帮助，请给个**STAR吧，谢谢!!!**
+
 ## 功能
 #### 基础篇
 * [服务注册](https://github.com/DerekYRC/mini-spring-cloud/blob/main/changelog.md#服务注册)
@@ -40,4 +42,4 @@
 邮箱：**15521077528@163.com**
 
 ## 参考
-- [精尽 Spring Cloud 学习指南](http://svip.iocoder.cn/Spring-Cloud/tutorials/)
+- [《精尽 Spring Cloud 学习指南》](http://svip.iocoder.cn/Spring-Cloud/tutorials/)

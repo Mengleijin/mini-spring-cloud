@@ -2,7 +2,6 @@ package com.github.cloud.tutu.discovery;
 
 import com.github.cloud.tutu.TutuDiscoveryProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,7 +19,7 @@ public class TutuDiscoveryAutoConfiguration {
     }
 
     @Bean
-    public DiscoveryClient tutuDiscoveryClient(TutuDiscoveryProperties tutuDiscoveryProperties) {
+    public TutuDiscoveryClient tutuDiscoveryClient(TutuDiscoveryProperties tutuDiscoveryProperties) {
         return new TutuDiscoveryClient(tutuDiscoveryProperties);
     }
 }
