@@ -12,7 +12,7 @@
 
 写作本项目的目的之一是降低阅读原始spring cloud源码的难度。希望掌握本项目讲解的内容之后再阅读原始spring-cloud的源码能起到事半功倍的效果，所以本项目的功能实现逻辑及原理和官方保持一致但追求代码最大精简化，可以理解为一个源码导读的项目。
 
-技术能力有限且文采不佳，大家可以在此[**issue**](https://github.com/DerekYRC/mini-spring-cloud/issues/1) 留言提问题和发表建议，也欢迎Pull Request完善此项目。
+技术能力有限且文采欠佳，大家可以在此[**issue**](https://github.com/DerekYRC/mini-spring-cloud/issues/1) 留言提问题和发表建议，也欢迎Pull Request完善此项目。
 
 # [服务注册](#服务注册)
 > 分支: service-registry
@@ -475,6 +475,89 @@ spring:
 Port of the service provider: 19922
 ```
 
+
+# [集成ribbon实现客户端负载均衡](#负载均衡)
+> 分支: load-balancer
+
+## 关于ribbon
+> (翻译自官方文档)ribbon是一个提供如下功能的依赖包:
+> - 负载均衡
+> - 容错机制
+> - 支持多种协议(HTTP, TCP, UDP)，支持异步和响应式的调用方式
+> - 缓存和批处理
+
+#### ribbon核心API
+
+- IClientConfig接口，定义加载和读取ribbon客户端配置的方法，实现类DefaultClientConfigImpl
+- IPing接口，顾名思义，判断服务是否存活
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+spring-cloud-commons定义的负载均衡API:
+ServiceInstanceChooser，服务实例选择器:
+```java
+/**
+ * Implemented by classes which use a load balancer to choose a server to send a request to.
+ */
+public interface ServiceInstanceChooser {
+
+	/**
+	 * 根据服务
+	 */
+	ServiceInstance choose(String serviceId);
+
+	/**
+	 * Chooses a ServiceInstance from the LoadBalancer for the specified service and
+	 * LoadBalancer request.
+	 * @param serviceId The service ID to look up the LoadBalancer.
+	 * @param request The request to pass on to the LoadBalancer
+	 * @param <T> The type of the request context.
+	 * @return A ServiceInstance that matches the serviceId.
+	 */
+	<T> ServiceInstance choose(String serviceId, Request<T> request);
+
+}
+
+```
 
 
 

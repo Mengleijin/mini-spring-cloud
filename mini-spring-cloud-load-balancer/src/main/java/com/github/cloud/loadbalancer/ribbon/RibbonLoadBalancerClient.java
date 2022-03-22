@@ -58,7 +58,7 @@ public class RibbonLoadBalancerClient implements LoadBalancerClient {
     }
 
     /**
-     * 重建请求URI，使用服务实例的IP:端口替换服务名称
+     * 重建请求URI，将服务名称替换为服务实例的IP:端口
      *
      * @param server
      * @param original
@@ -67,7 +67,7 @@ public class RibbonLoadBalancerClient implements LoadBalancerClient {
     @Override
     public URI reconstructURI(ServiceInstance server, URI original) {
         try {
-            //使用服务实例的IP:端口替换服务名称，例如http://provider-application/echo被重建为http://192.168.100.1:8888/echo
+            //将服务名称替换为服务实例的IP:端口，例如http://provider-application/echo被重建为http://192.168.100.1:8888/echo
             StringBuilder sb = new StringBuilder();
             sb.append(original.getScheme()).append("://");
             sb.append(server.getHost());
