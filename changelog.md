@@ -476,7 +476,7 @@ Port of the service provider: 19922
 ```
 
 
-# [集成ribbon实现客户端负载均衡](#负载均衡)
+# [集成ribbon实现客户端负载均衡](#集成ribbon实现客户端负载均衡)
 > 分支: load-balancer
 
 ## 关于ribbon
@@ -807,6 +807,14 @@ public class RibbonLoadBalancerClient implements LoadBalancerClient {
         return null;
     }
 }
+```
+
+自动装配spring.factories
+
+```yaml
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.github.cloud.loadbalancer.ribbon.config.RibbonAutoConfiguration,\
+  com.github.cloud.loadbalancer.ribbon.config.RibbonTutuAutoConfiguration
 ```
 
 测试:
