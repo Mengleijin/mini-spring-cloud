@@ -1,7 +1,6 @@
 package com.github.cloud.loadbalancer.ribbon.config;
 
 import com.github.cloud.loadbalancer.ribbon.RibbonClientSpecification;
-import com.github.cloud.loadbalancer.ribbon.RibbonClients;
 import com.github.cloud.loadbalancer.ribbon.RibbonLoadBalancerClient;
 import com.github.cloud.loadbalancer.ribbon.SpringClientFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import java.util.List;
  * @date 2022/3/22
  */
 @Configuration
-@RibbonClients
 public class RibbonAutoConfiguration {
 
     @Autowired(required = false)

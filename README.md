@@ -24,6 +24,9 @@
 #### 扩展篇
 > TODO 基础篇遗留的功能点
 
+* [自定义负载均衡规则]()
+
+
 
 ## 使用方法
 阅读 [changelog.md](https://github.com/DerekYRC/mini-spring-cloud/blob/main/changelog.md)
